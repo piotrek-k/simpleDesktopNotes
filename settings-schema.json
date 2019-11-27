@@ -34,6 +34,17 @@
         "description": "Corner radius",
         "tooltip": "Radius for rounding the desklet's corners"
     },
+    "maxwidth": {
+        "type": "spinbutton",
+        "indent": true,
+        "default": 200.0,
+        "min": 100,
+        "max": 2000.0,
+        "step": 1,
+        "units": "px",
+        "description": "Max width (px)",
+        "tooltip": "Max width of note"
+    },
     "textcolor": {
         "type": "colorchooser",
         "indent": true,

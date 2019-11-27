@@ -2,5 +2,6 @@
     "uuid": "markdownNotes@piotrek-k",
     "name": "MarkdownNotes",
     "description": "Displays text files on screen",
-    "prevent-decorations": true
+    "prevent-decorations": true,
+    "max-instances": "10"
 }

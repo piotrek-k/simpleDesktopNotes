@@ -24,6 +24,7 @@ HelloDesklet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "cornerradius", "cornerRadius", this.on_setting_changed);
         this.settings.bindProperty(Settings.BindingDirection.IN, "bgcolor", "bgColor", this.on_setting_changed);
         this.settings.bindProperty(Settings.BindingDirection.IN, "textcolor", "textColor", this.on_setting_changed);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "maxwidth", "maxWidth", this.on_setting_changed);
 
         this.setupUI();
     },
@@ -50,10 +51,12 @@ HelloDesklet.prototype = {
     },
 
     rebuildUI: function () {
-        this.window.style = "padding: 10px; border-radius: " +
-                        this.cornerRadius + "px; background-color: " +
-                        (this.bgColor.replace(")", "," + (1.0 - this.transparency) + ")")).replace("rgb", "rgba") +
-                        "; color: " + this.textColor;
+        this.window.style = 
+            "max-width: " + this.maxWidth + "px; " +
+            "padding: 10px; "+
+            "border-radius: " + this.cornerRadius + "px;" + 
+            "background-color: " + (this.bgColor.replace(")", "," + (1.0 - this.transparency) + ")")).replace("rgb", "rgba") + ";" +
+            "color: " + this.textColor;
     },
 
 
