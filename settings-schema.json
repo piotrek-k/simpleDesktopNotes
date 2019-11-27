@@ -1,0 +1,9 @@
+{
+    "file": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path to note text file",
+        "tooltip": "Select your text file, where to read from and save to.",
+        "allow-none" : true
+    }
+}
