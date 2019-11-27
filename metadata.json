@@ -1,6 +1,6 @@
 {
     "uuid": "markdownNotes@piotrek-k",
-    "name": "Hello, world! desklet",
-    "description": "Displays Hello, World!",
-    "prevent-decorations": false
+    "name": "MarkdownNotes",
+    "description": "Displays text files on screen",
+    "prevent-decorations": true
 }
