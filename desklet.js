@@ -16,7 +16,7 @@ HelloDesklet.prototype = {
     _init: function (metadata, desklet_id) {
         Desklet.Desklet.prototype._init.call(this, metadata);
 
-        this.settings = new Settings.DeskletSettings(this, "markdownNotes@piotrek-k", desklet_id);
+        this.settings = new Settings.DeskletSettings(this, "simpleDesktopNotes@piotrek-k", desklet_id);
         this.settings.bindProperty(Settings.BindingDirection.IN, "file", "file", this.on_setting_changed);
         this.settings.bindProperty(Settings.BindingDirection.IN, "transparency", "transparency", this.on_setting_changed);
         this.settings.bindProperty(Settings.BindingDirection.IN, "cornerradius", "cornerRadius", this.on_setting_changed);
