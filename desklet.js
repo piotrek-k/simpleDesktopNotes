@@ -29,27 +29,22 @@ HelloDesklet.prototype = {
 
     setupUI: function () {
         this.notecontent = "";
-        
+
         // main container for the desklet
         this.window = new St.BoxLayout({
             vertical: true,
             style_class: "desklet"
         });
         this.refreshUI();
-        this.text = new St.Label();
-        this.text.set_text("ddd!");
-
         this.reloadComponentText();
-
-        this.window.add_actor(this.text);
         this.setContent(this.window);
     },
 
     refreshUI: function () {
-        this.window.style = 
+        this.window.style =
             "max-width: " + this.maxWidth + "px; " +
-            "padding: 10px; "+
-            "border-radius: " + this.cornerRadius + "px;" + 
+            "padding: 10px; " +
+            "border-radius: " + this.cornerRadius + "px;" +
             "background-color: " + (this.bgColor.replace(")", "," + (1.0 - this.transparency) + ")")).replace("rgb", "rgba") + ";" +
             "color: " + this.textColor;
     },
@@ -59,6 +54,8 @@ HelloDesklet.prototype = {
         // get notes text file path
         this.finalPath = decodeURIComponent(this.file.replace("file://", ""));
         if (this.finalPath == "") this.finalPath = "note.txt"; // in home dir
+
+        this.notecontent = "Loading...";
 
         // read file async
         let file = Gio.file_new_for_path(this.finalPath);
@@ -76,14 +73,43 @@ HelloDesklet.prototype = {
                 this.notecontent = err.message;
             }
 
-            this.text.set_text(this.notecontent);
+            this.generateLabelsFromText();
         });
+    },
+
+    generateLabelsFromText: function () {
+        this.window.remove_all_children();
+
+        var lines = this.notecontent.split("\n");
+        for (var j = 0; j < lines.length; j++) {
+            if(lines[j].startsWith("#")){
+                var newString = lines[j].replace(/^#/gm,"").trim();
+                this.createLabel(newString, true);
+            }
+            else {
+                this.createLabel(lines[j], false);
+            }
+        }
     },
 
     on_setting_changed: function () {
         this.reloadComponentText();
         this.refreshUI();
     },
+
+    on_desklet_clicked: function () {
+        this.reloadComponentText();
+    },
+
+    createLabel: function (text, boldText=false) {
+        let label = new St.Label();
+        label.style = "";
+        if(boldText === true){
+            label.style += "font-weight: bold;";
+        }
+        label.text = text;
+        this.window.add_actor(label);
+    }
 }
 
 function main(metadata, desklet_id) {
